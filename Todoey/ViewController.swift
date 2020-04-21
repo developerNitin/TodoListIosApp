@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Todoey
-//
-//  Created by Philipp Muellauer on 02/12/2019.
-//  Copyright © 2019 App Brewery. All rights reserved.
-//
 
 import UIKit
 
@@ -22,9 +15,17 @@ class todoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath)
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath)
         cell.textLabel?.text = items[indexPath.row]
+        
+        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
         return cell
     }
