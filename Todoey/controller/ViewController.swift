@@ -4,7 +4,7 @@ import UIKit
 class todoListViewController: UITableViewController {
     
     var items = [Item]()
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
 
     override func viewDidLoad() {
         
@@ -50,6 +50,8 @@ class todoListViewController: UITableViewController {
         
         items[indexPath.row].done = !items[indexPath.row].done
         
+        self.saveItem()
+        
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -66,7 +68,9 @@ class todoListViewController: UITableViewController {
             newItem.title = textFiled.text!
             
             self.items.append(newItem)
-//            self.defaults.set(self.items, forKey: "TodoListArray")
+            
+            self.saveItem()
+        
             self.tableView.reloadData()
         })
         
@@ -76,6 +80,17 @@ class todoListViewController: UITableViewController {
             textFiled = alertTextField
         }
        present(alert,animated: true, completion: nil)
+    }
+    
+    func saveItem() {
+       let encoder = PropertyListEncoder()
+                   
+       do {
+        let data = try encoder.encode(items)
+           try data.write(to: dataFilePath!)
+       } catch {
+           print("error is \(error)")
+       }
     }
 }
 
