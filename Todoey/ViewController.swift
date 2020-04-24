@@ -4,12 +4,14 @@ import UIKit
 class todoListViewController: UITableViewController {
     
     var items = ["cake with cream", "milk of cow", "falling song"]
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        if let itemArray = defaults.array(forKey: "TodoListArray") as? [String]{
+            items = itemArray
+        }
     }
-    
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,7 +44,11 @@ class todoListViewController: UITableViewController {
         var textFiled = UITextField()
         
         alert.addAction(UIAlertAction(title: "add item", style: .default) { (action) in
+            
             self.items.append(textFiled.text!)
+            
+            self.defaults.set(self.items, forKey: "TodoListArray")
+           
             self.tableView.reloadData()
         })
         
