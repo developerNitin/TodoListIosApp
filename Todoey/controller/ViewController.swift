@@ -41,11 +41,7 @@ class todoListViewController: UITableViewController {
         
         cell.textLabel?.text = items[indexPath.row].title
         
-        if items[indexPath.row].done == true {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
+        cell.accessoryType = items[indexPath.row].done ? .checkmark : .none
         
         return cell
     }
@@ -57,6 +53,7 @@ class todoListViewController: UITableViewController {
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     
     @IBAction func barButton(_ sender: UIBarButtonItem) {
         
