@@ -10,26 +10,26 @@ class todoListViewController: UITableViewController {
         
         super.viewDidLoad()
         
-        let newItem1 = Item()
-        newItem1.title = "bunburder"
-        items.append(newItem1)
-        
-        let newItem2 = Item()
-        newItem2.title = "sun-bun"
-        items.append(newItem2)
-        
-        let newItem3 = Item()
-        newItem3.title = "find jerry"
-        items.append(newItem3)
+//        let newItem1 = Item()
+//        newItem1.title = "bunburder"
+//        items.append(newItem1)
+//
+//        let newItem2 = Item()
+//        newItem2.title = "sun-bun"
+//        items.append(newItem2)
+//
+//        let newItem3 = Item()
+//        newItem3.title = "find jerry"
+//        items.append(newItem3)
         
 //        if let itemArray = defaults.array(forKey: "TodoListArray") as? [String] {
 //            items = itemArray
 //        }
+        loadItems()
     }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return items.count
     }
     
@@ -40,7 +40,6 @@ class todoListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath)
         
         cell.textLabel?.text = items[indexPath.row].title
-        
         cell.accessoryType = items[indexPath.row].done ? .checkmark : .none
         
         return cell
@@ -68,9 +67,7 @@ class todoListViewController: UITableViewController {
             newItem.title = textFiled.text!
             
             self.items.append(newItem)
-            
             self.saveItem()
-        
             self.tableView.reloadData()
         })
         
@@ -82,6 +79,7 @@ class todoListViewController: UITableViewController {
        present(alert,animated: true, completion: nil)
     }
     
+    
     func saveItem() {
        let encoder = PropertyListEncoder()
                    
@@ -91,6 +89,18 @@ class todoListViewController: UITableViewController {
        } catch {
            print("error is \(error)")
        }
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            
+            do {
+                items = try decoder.decode([Item].self, from: data)
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
