@@ -12,7 +12,7 @@ class todoListViewController: UITableViewController {
         super.viewDidLoad()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-//        loadItems()
+        loadItems()
     }
     
     
@@ -78,16 +78,13 @@ class todoListViewController: UITableViewController {
        }
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//
-//            do {
-//                items = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
+    func loadItems() {
+        let element: NSFetchRequest <Item> = Item.fetchRequest()
+        do {
+            items = try context.fetch(element)
+        } catch {
+            print("fetch error \(error)")
+        }
+    }
 }
 
