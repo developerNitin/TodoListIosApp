@@ -34,6 +34,9 @@ class todoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+//        context.delete(items[indexPath.row])
+//        items.remove(at: indexPath.row)
+        
         items[indexPath.row].done = !items[indexPath.row].done
         
         self.saveItem()
@@ -75,7 +78,7 @@ class todoListViewController: UITableViewController {
          try context.save()
        } catch {
          print("error unresolved (saving context) \(error)")
-       }
+        }
     }
     
     func loadItems() {

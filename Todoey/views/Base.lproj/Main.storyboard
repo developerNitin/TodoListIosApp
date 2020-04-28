@@ -31,7 +31,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Todoly" id="acI-N9-WxW" colorLabel="IBBuiltInLabel-Green">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="sHn-hP-wj8">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="barButton:" destination="Opb-v1-t8a" id="frK-pa-SDn"/>
                             </connections>
@@ -50,10 +49,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="p1N-W5-k1L">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
