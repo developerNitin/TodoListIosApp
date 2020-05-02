@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1AE844245DAE9A00C64188 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1AE843245DAE9A00C64188 /* CategoryTableViewController.swift */; };
 		1E768D922454656A002C1DC9 /* dataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E768D902454656A002C1DC9 /* dataModel.xcdatamodeld */; };
 		EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4F9239524DB00FB933B /* AppDelegate.swift */; };
 		EB2BE4FE239524DB00FB933B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4FD239524DB00FB933B /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E1AE843245DAE9A00C64188 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryTableViewController.swift; path = Todoey/controller/CategoryTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		1E768D912454656A002C1DC9 /* dataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = dataModel.xcdatamodel; sourceTree = "<group>"; };
 		EB2BE4F6239524DB00FB933B /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE4F9239524DB00FB933B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 		1E3F46AF2453064500BCBA7F /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				1E1AE843245DAE9A00C64188 /* CategoryTableViewController.swift */,
 				EB2BE4FD239524DB00FB933B /* ViewController.swift */,
 			);
 			path = controller;
@@ -173,6 +176,7 @@
 				EB2BE4FE239524DB00FB933B /* ViewController.swift in Sources */,
 				1E768D922454656A002C1DC9 /* dataModel.xcdatamodeld in Sources */,
 				EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */,
+				1E1AE844245DAE9A00C64188 /* CategoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
