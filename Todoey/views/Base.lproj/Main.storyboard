@@ -39,7 +39,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="Opb-v1-t8a" kind="show" identifier="category" id="DTz-8l-f1o"/>
+                        <segue destination="Opb-v1-t8a" kind="show" identifier="gotoitem" id="DTz-8l-f1o"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7X-4G-Apy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

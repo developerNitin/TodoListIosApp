@@ -9,15 +9,19 @@
 import UIKit
 import CoreData
 
-class todoListViewController: UITableViewController {
+class TodoListViewController: UITableViewController {
     
     var items = [Item]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
+    var selectedCategory: Category? {
+        didSet {
+            loadItems()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadItems()
     }
     
     //MARK: - Tableview method
@@ -40,8 +44,8 @@ class todoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        context.delete(items[indexPath.row])
-//        items.remove(at: indexPath.row)
+        //        context.delete(items[indexPath.row])
+        //        items.remove(at: indexPath.row)
         
         items[indexPath.row].done = !items[indexPath.row].done
         
@@ -60,9 +64,10 @@ class todoListViewController: UITableViewController {
         
         alert.addAction(UIAlertAction(title: "add item", style: .default) { (action) in
             
-           
+            
             let newItem = Item(context: self.context)
             newItem.title = textFiled.text!
+            newItem.parentCategory = self.selectedCategory
             self.items.append(newItem)
             
             newItem.done = false
@@ -75,21 +80,28 @@ class todoListViewController: UITableViewController {
             alertTextField.placeholder = "create new item"
             textFiled = alertTextField
         }
-       present(alert,animated: true, completion: nil)
+        present(alert,animated: true, completion: nil)
     }
     
     //MARK: - Add new items
     
     func saveItem() {
-       do {
-         try context.save()
-       } catch {
-         print("error unresolved (saving context) \(error)")
+        do {
+            try context.save()
+        } catch {
+            print("error unresolved (saving context) \(error)")
         }
     }
     
     
-    func loadItems(request: NSFetchRequest <Item> = Item.fetchRequest()) {
+    func loadItems(request: NSFetchRequest <Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let categoryPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, categoryPredicate])
+        } else {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [ categoryPredicate])
+        }
         do {
             items = try context.fetch(request)
         } catch {
@@ -100,14 +112,14 @@ class todoListViewController: UITableViewController {
 
 //MARK: - Search bar method
 
-extension todoListViewController: UISearchBarDelegate {
+extension TodoListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         let request : NSFetchRequest<Item> = Item.fetchRequest()
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
-        loadItems(request: request)
+        loadItems(request: request, predicate: predicate)
         
         tableView.reloadData()
     }
